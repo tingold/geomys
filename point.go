@@ -12,10 +12,10 @@ type Point struct {
 // or lon∉[-180,180].
 func Geo(lat, lon float64) Point {
 	if !(-90 <= lat && lat <= 90) {
-		panic("geomys.Geo: domain error: `lat`")
+		panic("geomys.Geo: lat not in [-90,90]")
 	}
 	if !(-180 <= lon && lon <= 180) {
-		panic("geomys.Geo: domain error: `lon`")
+		panic("geomys.Geo: lon not in [-180,180]")
 	}
 	return Point{lat, lon}
 }
