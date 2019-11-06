@@ -70,8 +70,12 @@ func GeoHash(n int, p Point) (hash string, res float64) {
 }
 
 // HashGeo -- decodes the given geohash `hash` into a pair of geographic
-// coordinates returned in `p`. When `hash` is decoded without errors,
-// sets `ok` to true; otherwise sets `ok` to false and returns (0,0) in `p`.
+// coordinates returned in `p`.
+//
+// See: https://en.wikipedia.org/wiki/Geohash
+//
+// When `hash` is decoded without errors, sets `ok` to true;
+// otherwise sets `ok` to false and returns (0,0) in `p`.
 // When the length of `hash` is greater than 15, only the first 15 characters
 // are decoded; when the length is less than 3, ((0,0),false) is returned.
 func HashGeo(hash string) (p Point, ok bool) {
