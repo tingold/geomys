@@ -8,25 +8,25 @@ import (
 // Geocentric -- a coordinate converter between
 // the geographic and geocentric coordinate systems.
 type Geocentric struct {
-	sph Spheroid
+	s Spheroid
 }
 
 // NewGeocentric -- returns a geographic/geocentric
-// coordinate converter for the spheroid `sph`.
-func NewGeocentric(sph Spheroid) Geocentric {
-	return Geocentric{sph}
+// coordinate converter for the spheroid `s`.
+func NewGeocentric(s Spheroid) Geocentric {
+	return Geocentric{s}
 }
 
 // Spheroid -- returns the spheroid of the converter `geocen`.
 func (geocen Geocentric) Spheroid() Spheroid {
-	return geocen.sph
+	return geocen.s
 }
 
 // Forward -- converts the geographic coordinates of `p`
 // to the geocentric coordinates `xyz`.
 func (geocen Geocentric) Forward(p Point) (xyz [3]float64) {
-	a := geocen.sph.A()
-	e2 := geocen.sph.E2()
+	a := geocen.s.A()
+	e2 := geocen.s.E2()
 	φ, λ := p.Geo()
 	sinφ, cosφ := mym.SinCosD(φ)
 	sinλ, cosλ := mym.SinCosD(λ)
