@@ -28,11 +28,23 @@ func (g GreatEllipse) Inverse(p1, p2 Point) (s12 float64, α1, α2 float64) {
 	f1, e2 := 1-f, g.sph.E2()
 	//
 	lat1, lon1 := p1.Geo()
+	if lat1 > 90*(1-mym.Epsilon) {
+		lat1 = 90 * (1 - mym.Epsilon)
+	}
+	if lat1 < -90*(1-mym.Epsilon) {
+		lat1 = -90 * (1 - mym.Epsilon)
+	}
 	sβ1, cβ1 := mym.SinCosD(lat1)
 	sβ1 *= f1
 	sβ1, cβ1 = hat(sβ1, cβ1)
 	//
 	lat2, lon2 := p2.Geo()
+	if lat2 > 90*(1-mym.Epsilon) {
+		lat2 = 90 * (1 - mym.Epsilon)
+	}
+	if lat2 < -90*(1-mym.Epsilon) {
+		lat2 = -90 * (1 - mym.Epsilon)
+	}
 	sβ2, cβ2 := mym.SinCosD(lat2)
 	sβ2 *= f1
 	sβ2, cβ2 = hat(sβ2, cβ2)
