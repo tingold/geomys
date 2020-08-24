@@ -12,6 +12,13 @@ type Albers struct {
 	n, c, ρ0, λ0 float64
 }
 
+// NewAlbers -- returns a new Albers map projection based on the spheroid `sph`.
+//
+// The projection has the following parameters:
+//	lat1 -- latitude of the 1st standard parallel
+//	lat2 -- latitude of the 2nd standard parallel
+//	lat0 -- latitude of the center
+//	lon0 -- longitude of the center
 func NewAlbers(sph Spheroid, lat1, lat2, lat0, lon0 float64) Albers {
 	par := map[string]float64{"lat1": lat1, "lat2": lat2, "lat0": lat0, "lon0": lon0}
 	alb := Albers{sph: sph, par: par}
