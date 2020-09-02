@@ -55,7 +55,7 @@ func (prj Albers) Project(p Point) (xy [2]float64) {
 		panic("geomys.Albers.Project: uninitialized structure")
 	}
 	//
-	lat, lon := p.Geo()
+	lat, lon, _ := p.Geo()
 	sinφ, _ := mym.SinCosD(lat)
 	q := prj.qalb(sinφ)
 	ρ := prj.sph.A() * math.Sqrt(prj.c-prj.n*q) / prj.n

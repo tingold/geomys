@@ -10,8 +10,8 @@ import (
 //
 // See: Andoyer, H. Bull. Géodésique (1932) 34: 77. https://doi.org/10.1007/BF03030136
 func Andoyer(s Spheroid, p1, p2 Point) float64 {
-	φ1, λ1 := p1.Geo()
-	φ2, λ2 := p2.Geo()
+	φ1, λ1,_ := p1.Geo()
+	φ2, λ2,_ := p2.Geo()
 	//
 	F := (φ1 + φ2) / 2
 	G := (φ1 - φ2) / 2

@@ -27,7 +27,7 @@ func (geocen Geocentric) Spheroid() Spheroid {
 func (geocen Geocentric) Forward(p Point) (xyz [3]float64) {
 	a := geocen.s.A()
 	e2 := geocen.s.E2()
-	φ, λ := p.Geo()
+	φ, λ, _ := p.Geo()
 	sinφ, cosφ := mym.SinCosD(φ)
 	sinλ, cosλ := mym.SinCosD(λ)
 	N := a / math.Sqrt(1-e2*sinφ*sinφ)
@@ -78,5 +78,9 @@ func (geocen Geocentric) Inverse(xyz [3]float64) Point {
 		φ = -φ
 	}
 	λ := math.Atan2(xyz[1], xyz[0])
-	return Geo(φ*(180/math.Pi), λ*(180/math.Pi))
+
+	//todo add altitude
+	alt := 0.0
+
+	return Geo(φ*(180/math.Pi), λ*(180/math.Pi), alt)
 }

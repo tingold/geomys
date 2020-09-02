@@ -37,7 +37,7 @@ func GeoHash(n int, p Point) (hash string, res float64) {
 		return 0
 	}
 	//
-	lat, lon := p.Geo()
+	lat, lon, _ := p.Geo()
 	if lat == 90 {
 		lat -= lateps / 2
 	}
@@ -144,5 +144,5 @@ func HashGeo(hash string) (p Point, ok bool) {
 	}
 	lat = math.Round(scale*lat) / scale
 	lon = math.Round(scale*lon) / scale
-	return Geo(lat, lon), true
+	return Geo(lat, lon, 0.0), true
 }

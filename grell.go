@@ -27,7 +27,7 @@ func (g GreatEllipse) Inverse(p1, p2 Point) (s12 float64, α1, α2 float64) {
 	a, f := g.sph.A(), g.sph.F()
 	f1, e2 := 1-f, g.sph.E2()
 	//
-	lat1, lon1 := p1.Geo()
+	lat1, lon1, _ := p1.Geo()
 	if lat1 > 90*(1-mym.Epsilon) {
 		lat1 = 90 * (1 - mym.Epsilon)
 	}
@@ -38,7 +38,7 @@ func (g GreatEllipse) Inverse(p1, p2 Point) (s12 float64, α1, α2 float64) {
 	sβ1 *= f1
 	sβ1, cβ1 = hat(sβ1, cβ1)
 	//
-	lat2, lon2 := p2.Geo()
+	lat2, lon2, _ := p2.Geo()
 	if lat2 > 90*(1-mym.Epsilon) {
 		lat2 = 90 * (1 - mym.Epsilon)
 	}
@@ -98,7 +98,7 @@ func (g GreatEllipse) Direct(p1 Point, α1 float64, s12 float64) (p2 Point, α2 
 	a, f := g.sph.A(), g.sph.F()
 	f1, e2 := 1-f, g.sph.E2()
 	//
-	lat1, lon1 := p1.Geo()
+	lat1, lon1,_ := p1.Geo()
 	sγ1, cγ1 := mym.SinCosD(α1)
 	sβ1, cβ1 := mym.SinCosD(lat1)
 	sβ1 *= f1
@@ -151,7 +151,7 @@ func (g GreatEllipse) Direct(p1 Point, α1 float64, s12 float64) (p2 Point, α2 
 	}
 	//
 	lat2 := math.Atan2(sβ2, f1*cβ2) * (180 / math.Pi)
-	p2 = Geo(lat2, lon2)
+	p2 = Geo(lat2, lon2, 0.0)
 	α2 = math.Atan2(sγ2, cγ2*math.Sqrt(1-e2*cβ2*cβ2)) * (180 / math.Pi)
 	return
 }
