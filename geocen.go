@@ -79,8 +79,10 @@ func (geocen Geocentric) Inverse(xyz [3]float64) Point {
 	}
 	λ := math.Atan2(xyz[1], xyz[0])
 
-	//todo add altitude
-	alt := 0.0
 
-	return Geo(φ*(180/math.Pi), λ*(180/math.Pi), alt)
+	lat := φ*(180/math.Pi)
+	lng := λ*(180/math.Pi)
+	alt := P * math.Cos(lat) + xyz[2]*math.Sin(lat) - a*math.Sqrt(1-math.Pow(math.E,2)*math.Pow(math.Sin(lat),2))
+
+	return Geo(lat, lng, alt)
 }
